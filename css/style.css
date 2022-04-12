@@ -8,6 +8,7 @@
   --title-text-color: rgba(33, 33, 33, 1);
   --secondy-text-color: rgba(117, 117, 117, 1);
   --accent-color: rgba(33, 150, 243, 1);
+  --accent-color-focus: rgba(24, 140, 232, 1);
   --primery-white-color: #ffffff;
   --bgc-grey: rgba(245, 244, 250, 1);
   --fill-icon: rgba(175, 177, 184, 0.8);
@@ -44,7 +45,7 @@ img {
 }
 
 body {
-  background-color: var(--bgc-grey);
+  /* background-color: var(--bgc-grey); */
   color: var(--title-text-color);
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -238,8 +239,11 @@ body {
 }
 
 .hero .button:hover {
-  background-color: rgb(19, 129, 220);
+  background-color: var(--accent-color-focus);
 }
+
+/*========= Hero END ========= */
+/*========= Modal START ========= */
 
 .backdrop {
   position: fixed;
@@ -277,7 +281,7 @@ body {
 
 .form {
   padding: 40px 40px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .form > h2 {
@@ -287,35 +291,68 @@ body {
   margin-bottom: 12px;
 }
 .form-field {
-  margin-bottom: 10px;
+  position: relative;
 }
 
 .form-labal {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-bottom: 4px;
+  display: block;
+
+  margin-bottom: 10px;
 
   font-size: 12px;
   line-height: 1.16;
-
   letter-spacing: 0.01em;
 
   color: var(--form-labal-color);
 }
 
-.label-text{
+.form-labal:last-child {
+  margin-bottom: 0;
+}
 
+.label-text {
+  display: block;
+  text-align: left;
+  margin-bottom: 4px;
+}
+
+.form-labal-box {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .form-input {
+  position: relative;
+
   width: 100%;
   padding: 12px;
+  padding-left: 42px;
   margin: 0;
-  margin-top: 4px;
+
   font: inherit;
   border-radius: 4px;
   border: 1px solid rgba(33, 33, 33, 0.2);
+}
+
+.form-input:hover,
+.form-input:hover:focus {
+  border: 1px solid var(--accent-color);
+}
+
+.form-contact-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  fill: var(--title-text-color);
+
+  transition: fill 250ms var(--trans-prop) 0ms;
+}
+
+.form-input:hover + .form-contact-icon,
+.form-input:focus + .form-contact-icon {
+  fill: var(--accent-color);
 }
 
 .form-textarea {
@@ -324,12 +361,55 @@ body {
 
   padding: 12px;
   margin: 0;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 
   font: inherit;
   border-radius: 4px;
   border: 1px solid rgba(33, 33, 33, 0.2);
   resize: none;
+}
+
+.form-labal-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.checkbox {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+.checkbox-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+
+  border: 2px solid var(--title-text-color);
+  border-radius: 2px;
+
+  background-color: rgba (25, 100, 32, 0.3);
+  fill: transparent;
+  transition: fill 250ms var(--trans-prop), background 250ms var(--trans-prop),
+    border 250ms var(--trans-prop);
+}
+
+.checkbox:checked + .checkbox-icon {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  background-size: contain;
+  background-origin: border-box;
+
+  fill: var(--accent-color);
 }
 
 .form > p {
@@ -347,10 +427,15 @@ body {
   top: 8px;
   right: 8px;
 
-  fill: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  fill: var(--title-text-color);
 
   background-color: transparent;
-  border: 0 transparent;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
 
   width: 30px;
   height: 30px;
@@ -363,10 +448,10 @@ body {
 
 .button-close:hover,
 .button-close:focus {
-  fill: var(--bgc-grey);
+  fill: var(--accent-color);
 }
 
-/*========= END Hero ========= */
+/*========= Modal END ========= */
 /*========= Action =========*/
 
 .action {
@@ -760,7 +845,7 @@ body {
 
 .footer_form .button:hover,
 .footer_form .button:focus {
-  background-color: rgb(19, 129, 220);
+  background-color: var(--accent-color-focus);
 }
 
 .footer_form .social-list-icon {
@@ -842,8 +927,7 @@ body {
   display: block;
   border: 1px solid transparent;
 
-  transition: border 250ms var(--trans-prop) 0ms,
-    box-shadow 250ms var(--trans-prop) 0ms;
+  transition: box-shadow 250ms var(--trans-prop) 0ms;
 }
 
 .project-link:hover,
@@ -879,7 +963,8 @@ body {
   line-height: 1.55;
 }
 
-.project-link:hover .project-overlay-text {
+.project-link:hover .project-overlay-text,
+.project-link:focus .project-overlay-text {
   transform: translatex(0);
 }
 
